@@ -1,9 +1,8 @@
 // Aumente o número da versão sempre que atualizar a tabela, para os celulares baixarem a versão nova.
-const VERSAO = 'quiron-v1';
+const VERSAO = 'quiron-v2';
 const ARQUIVOS = [
   './', './index.html', './manifest.webmanifest',
-  './img/badge_color.png', './img/badge_gold.png', './img/head.png',
-  './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/favicon-32.png'
+  './icon-192.png', './icon-512.png', './apple-touch-icon.png', './favicon-32.png'
 ];
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(VERSAO).then((c) => c.addAll(ARQUIVOS)).then(() => self.skipWaiting()));
