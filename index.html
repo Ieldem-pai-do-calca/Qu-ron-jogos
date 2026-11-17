@@ -135,7 +135,7 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
   <div class="wrap">
     <div><b id="n-diretos">10</b><span>jogos confirmados</span></div>
     <div><b id="n-cond">6</b><span>jogos se a Quíron avançar</span></div>
-    <div><b>08:00</b><span>primeiro jogo, vôlei masculino</span></div>
+    <div><b>08:00</b><span>primeiro jogo, tênis de mesa feminino</span></div>
     <div><b>3</b><span>locais: Tuna, UEPA CCBS e UEPA</span></div>
   </div>
 </div>
@@ -199,25 +199,27 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
     ccbs: { nome: 'UEPA CCBS · Quadra extra', curto: 'UEPA CCBS', esportes: 'Vôlei', end: 'Tv. Perebebuí, 2623 · Marco, Belém (PA)', nota: 'Centro de Ciências Biológicas e da Saúde, Campus II da UEPA.', maps: MAPS + encodeURIComponent('UEPA CCBS Tv. Perebebuí 2623 Marco Belém PA'), prefixo: 'UEPA CCBS' },
     uepa: { nome: 'UEPA · Quadra', curto: 'UEPA Quadra', esportes: 'Futsal e Handebol', end: 'UEPA, Belém (PA)', nota: 'Link aponta para o Campus II da UEPA. Confirme com a organização se a quadra é neste mesmo campus.', maps: MAPS + encodeURIComponent('UEPA CCBS Tv. Perebebuí 2623 Marco Belém PA'), prefixo: 'UEPA' }
   };
-  function D(hora, esporte, fase, a, b, local, onde, dur, aviso) { return { hora: hora, esporte: esporte, fase: fase, a: a, b: b, local: local, onde: onde, dur: dur, aviso: !!aviso, cond: '' }; }
-  function C(hora, esporte, fase, a, b, local, onde, dur, cond) { return { hora: hora, esporte: esporte, fase: fase, a: a, b: b, local: local, onde: onde, dur: dur, aviso: false, cond: cond }; }
+  function D(hora, esporte, fase, a, b, local, onde, dur, aviso, obs) { return { hora: hora, esporte: esporte, fase: fase, a: a, b: b, local: local, onde: onde, dur: dur, aviso: !!aviso, cond: '', obs: obs || '' }; }
+  function C(hora, esporte, fase, a, b, local, onde, dur, cond, aviso) { return { hora: hora, esporte: esporte, fase: fase, a: a, b: b, local: local, onde: onde, dur: dur, aviso: !!aviso, cond: cond, obs: '' }; }
   var JOGOS = [
-    D('08:00', 'Vôlei masculino', 'Oitavas 2', 'SPRM', 'QUÍRON', 'ccbs', 'Quadra extra', '50 min'),
-    D('09:00', 'Tênis de mesa masculino', 'Oitavas 2', 'SANG', 'QUÍRON', 'tuna', 'Tênis de Mesa 1', '30 min'),
+    D('08:00', 'Tênis de mesa feminino', 'Oitavas 2', 'DIAST', 'QUÍRON', 'tuna', 'Tênis de Mesa 1', '30 min'),
+    D('09:00', 'Vôlei feminino', 'Oitavas 2', 'SANG', 'QUÍRON', 'ccbs', 'Quadra extra', '50 min'),
     D('09:30', 'Sinuca masculino', 'Oitavas 2', 'DIAST', 'QUÍRON', 'tuna', 'Sinuca 2', '30 min'),
-    D('10:00', 'Vôlei feminino', 'Oitavas 2', 'SANG', 'QUÍRON', 'ccbs', 'Quadra extra', '50 min'),
-    D('12:00', 'Tênis de mesa feminino', 'Oitavas 2', 'DIAST', 'QUÍRON', 'tuna', 'Tênis de Mesa 1', '30 min'),
+    D('11:00', 'Tênis de mesa masculino', 'Oitavas 2', 'SANG', 'QUÍRON', 'tuna', 'Tênis de Mesa 2', '30 min'),
+    C('12:00', 'Sinuca masculino', 'Quartas 4', 'BUF', 'Venc. O2', 'tuna', 'Sinuca 1', '30 min', 'Só se a Quíron vencer Sinuca masculino O2 (09:30). O vencedor é Quíron ou DIAST.'),
     D('12:30', 'Sinuca feminino', 'Quartas 2', 'BUF', 'QUÍRON', 'tuna', 'Sinuca 1', '30 min'),
-    D('13:30', 'Truco masculino', 'Quartas 2', 'QUÍRON', 'AGUIAS', 'tuna', 'Truco 2', '30 min'),
-    D('15:00', 'Futsal feminino', 'Oitavas 2', 'IMT', 'QUÍRON', 'uepa', 'Quadra', '50 min'),
-    C('15:30', 'Truco masculino', 'Semifinal 2', 'Venc. Q2', 'Venc. Q4', 'tuna', 'Truco 2', '30 min', 'Só se a Quíron vencer Truco masculino Q2 (13:30)'),
-    C('16:00', 'Sinuca masculino', 'Quartas 4', 'BUF', 'Venc. O2', 'tuna', 'Sinuca 2', '30 min', 'Só se a Quíron vencer Sinuca masculino O2 (09:30). O vencedor é Quíron ou DIAST.'),
+    D('13:00', 'Futsal feminino', 'Oitavas 2', 'IMT', 'QUÍRON', 'uepa', 'Quadra', '50 min'),
+    D('13:00', 'Vôlei masculino', 'Oitavas 2', 'SPRM', 'QUÍRON', 'ccbs', 'Quadra extra', '50 min'),
+    C('15:00', 'Tênis de mesa feminino', 'Quartas 4', 'SANG', 'Venc. O2', 'tuna', 'Tênis de Mesa 1', '30 min', 'Só se a Quíron vencer Tênis de mesa feminino O2 (08:00). O vencedor é Quíron ou DIAST.'),
+    D('15:00', 'Truco masculino', 'Quartas 4', 'QUÍRON', 'Venc. O2', 'tuna', 'Truco 1', '30 min', false, 'Adversário: vencedor do Truco masculino O2 (BRUTA ou DIAST, às 10:00).'),
+    C('15:30', 'Tênis de mesa feminino', 'Semifinal 2', 'Venc. Q2', 'Venc. Q4', 'tuna', 'Tênis de Mesa 1', '30 min', 'Só se a Quíron vencer Tênis de mesa feminino Q4 (15:00)', true),
+    C('16:00', 'Truco masculino', 'Semifinal 2', 'Venc. Q2', 'Venc. Q4', 'tuna', 'Truco 2', '30 min', 'Só se a Quíron vencer Truco masculino Q4 (15:00)'),
+    C('16:30', 'Sinuca masculino', 'Semifinal 2', 'Venc. Q2', 'Venc. Q4', 'tuna', 'Sinuca 2', '30 min', 'Só se a Quíron vencer Sinuca masculino Q4 (12:00)', true),
     D('16:30', 'Truco feminino', 'Quartas 2', 'SANG', 'QUÍRON', 'tuna', 'Truco 2', '30 min', true),
-    C('16:30', 'Sinuca masculino', 'Semifinal 2', 'Venc. Q2', 'Venc. Q4', 'tuna', 'Sinuca 2', '30 min', 'Só se a Quíron vencer Sinuca masculino Q4 (16:00)'),
     D('17:00', 'Futsal masculino', 'Quartas 2', 'SANG', 'QUÍRON', 'uepa', 'Quadra', '50 min', true),
-    C('17:30', 'Truco masculino', 'Final', 'Venc. S1', 'Venc. S2', 'tuna', 'Truco 1', '30 min', 'Só se a Quíron vencer Truco masculino S2 (15:30)'),
-    C('18:00', 'Sinuca masculino', 'Final', 'Venc. S1', 'Venc. S2', 'tuna', 'Sinuca 2', '30 min', 'Só se a Quíron vencer Sinuca masculino S2 (16:30)'),
-    C('18:30', 'Tênis de mesa masculino', 'Quartas 4', 'PRQ', 'Venc. O2', 'tuna', 'Tênis de Mesa 2', '30 min', 'Só se a Quíron vencer Tênis de mesa masculino O2 (09:00). O vencedor é Quíron ou SANG.')
+    C('17:30', 'Tênis de mesa feminino', 'Final', 'Venc. S1', 'Venc. S2', 'tuna', 'Tênis de Mesa 1', '30 min', 'Só se a Quíron vencer Tênis de mesa feminino S2 (15:30)', true),
+    C('18:00', 'Sinuca masculino', 'Final', 'Venc. S1', 'Venc. S2', 'tuna', 'Sinuca 2', '30 min', 'Só se a Quíron vencer Sinuca masculino S2 (16:30)', true),
+    C('18:30', 'Truco masculino', 'Final', 'Venc. S1', 'Venc. S2', 'tuna', 'Truco 2', '30 min', 'Só se a Quíron vencer Truco masculino S2 (16:00)')
   ];
   var diretos = JOGOS.filter(function (g) { return !g.cond; }).length;
   var condicionais = JOGOS.length - diretos;
@@ -261,6 +263,7 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
       i.appendChild(el('span', 'esporte', g.esporte + ' · ' + g.fase));
       i.appendChild(el('span', 'vs', g.a + ' x ' + g.b));
       if (g.cond) i.appendChild(el('span', 'cond-txt', g.cond));
+      if (g.obs) i.appendChild(el('span', 'cond-txt', g.obs));
       if (g.aviso) i.appendChild(el('span', 'aviso-jogo', 'Atenção: a tabela indica possível coincidência de atlética neste horário.'));
       var o = el('div', 'onde');
       o.appendChild(el('strong', null, LOCAIS[g.local].prefixo + ' · ' + g.onde));
