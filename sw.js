@@ -1,5 +1,5 @@
 // Aumente o número da versão sempre que atualizar a tabela, para os celulares baixarem a versão nova.
-const VERSAO = 'quiron-v4';
+const VERSAO = 'quiron-v5';
 const ARQUIVOS = [
   './', './index.html', './manifest.webmanifest',
   './icon-192.png', './icon-512.png', './apple-touch-icon.png', './favicon-32.png'

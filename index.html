@@ -119,9 +119,9 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
   <svg class="greca" aria-hidden="true"><defs><pattern id="g1" width="24" height="16" patternUnits="userSpaceOnUse"><path d="M2 14V2H22V12H8V6H16" fill="none" stroke="#D4A02A" stroke-width="2"/></pattern></defs><rect width="100%" height="16" fill="url(#g1)"/></svg>
   <div class="wrap">
     <div class="hero-texto">
-      <span class="selo">DIA 1 · DIA 19</span>
+      <span class="selo">DIAS 19 E 20</span>
       <h1>Onde e quando a Quíron joga</h1>
-      <p>Todos os jogos da Associação Atlética Acadêmica de Medicina Quíron no primeiro dia, com horário, modalidade, adversário e o link do local no Google Maps.</p>
+      <p>Todos os jogos da Associação Atlética Acadêmica de Medicina Quíron nos dias 19 e 20, com horário, modalidade, adversário e o link do local no Google Maps.</p>
       <div class="botoes">
         <a class="btn" href="#jogos">Ver todos os jogos</a>
         <a class="btn vazado" href="#locais">Abrir locais no Maps</a>
@@ -135,7 +135,7 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
   <div class="wrap">
     <div><b id="n-diretos">10</b><span>jogos confirmados</span></div>
     <div><b id="n-cond">6</b><span>jogos se a Quíron avançar</span></div>
-    <div><b>08:00</b><span>primeiro jogo, tênis de mesa feminino</span></div>
+    <div><b id="n-primeiro">08:00</b><span id="t-primeiro">primeiro jogo</span></div>
     <div><b>3</b><span>locais: Tuna, UEPA CCBS e UEPA</span></div>
   </div>
 </div>
@@ -145,11 +145,12 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
     <h2>Agenda da Quíron</h2>
     <p class="intro">Os jogos com borda dourada estão confirmados. Os jogos tracejados só acontecem se a Quíron vencer a partida indicada.</p>
     <div class="filtros">
+      <div class="fila" id="f-dia" role="group" aria-label="Escolher o dia"></div>
       <div class="fila" id="f-status" role="group" aria-label="Filtrar por situação"></div>
       <div class="fila" id="f-local" role="group" aria-label="Filtrar por local"></div>
     </div>
     <div class="lista" id="lista" aria-live="polite"></div>
-    <p class="nota">Na tabela, as atléticas aparecem pelas siglas oficiais. Horários e confrontos seguem a tabela do Dia 1.</p>
+    <p class="nota">Na tabela, as atléticas aparecem pelas siglas oficiais. Horários e confrontos seguem a tabela oficial de cada dia.</p>
   </section>
 
   <section id="locais">
@@ -179,7 +180,7 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
         <span>Individuais: 30 min, com dois horários por hora</span>
       </div>
     </div>
-    <p class="nota">Esta página traz o Dia 1. Os próximos dias entram quando a tabela sair.</p>
+    <p class="nota">Esta página traz o Dia 1 (dia 19) e o Dia 2 (dia 20). Os próximos dias entram quando a tabela sair.</p>
   </section>
 </main>
 
@@ -200,8 +201,8 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
     uepa: { nome: 'UEPA · Quadra de Educação Física', curto: 'UEPA Ed. Física', esportes: 'Futsal e Handebol', end: 'Av. João Paulo II, 817 · Marco, Belém (PA)', nota: 'Escola de Educação Física da UEPA (Campus III), entre as travessas Vileta e Timbó.', maps: MAPS + encodeURIComponent('UEPA Escola de Educação Física Av. João Paulo II 817 Marco Belém PA'), prefixo: 'UEPA Educação Física' }
   };
   function D(hora, esporte, fase, a, b, local, onde, dur, aviso, obs) { return { hora: hora, esporte: esporte, fase: fase, a: a, b: b, local: local, onde: onde, dur: dur, aviso: !!aviso, cond: '', obs: obs || '' }; }
-  function C(hora, esporte, fase, a, b, local, onde, dur, cond, aviso) { return { hora: hora, esporte: esporte, fase: fase, a: a, b: b, local: local, onde: onde, dur: dur, aviso: !!aviso, cond: cond, obs: '' }; }
-  var JOGOS = [
+  function C(hora, esporte, fase, a, b, local, onde, dur, cond, aviso, obs) { return { hora: hora, esporte: esporte, fase: fase, a: a, b: b, local: local, onde: onde, dur: dur, aviso: !!aviso, cond: cond, obs: obs || '' }; }
+  var D1 = [
     D('08:00', 'Tênis de mesa feminino', 'Oitavas 2', 'DIAST', 'QUÍRON', 'tuna', 'Tênis de Mesa 1', '30 min'),
     D('09:00', 'Vôlei feminino', 'Oitavas 2', 'SANG', 'QUÍRON', 'ccbs', 'Quadra extra', '50 min'),
     D('09:30', 'Sinuca masculino', 'Oitavas 2', 'DIAST', 'QUÍRON', 'tuna', 'Sinuca 2', '30 min'),
@@ -221,25 +222,58 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
     C('18:00', 'Sinuca masculino', 'Final', 'Venc. S1', 'Venc. S2', 'tuna', 'Sinuca 2', '30 min', 'Só se a Quíron vencer Sinuca masculino S2 (16:30)', true),
     C('18:30', 'Truco masculino', 'Final', 'Venc. S1', 'Venc. S2', 'tuna', 'Truco 2', '30 min', 'Só se a Quíron vencer Truco masculino S2 (16:00)')
   ];
-  var diretos = JOGOS.filter(function (g) { return !g.cond; }).length;
-  var condicionais = JOGOS.length - diretos;
-  document.getElementById('n-diretos').textContent = diretos;
-  document.getElementById('n-cond').textContent = condicionais;
+  var D2 = [
+    D('09:00', 'Basquete masculino', 'Quartas 4', 'QUÍRON', 'SANG', 'tuna', 'Quadra', '50 min'),
+    D('10:00', 'Vôlei masculino', 'Quartas 4', 'SANG', 'QUÍRON', 'ccbs', 'Quadra', '50 min'),
+    D('11:00', 'Society', 'Quartas 3', 'QUÍRON', 'URU', 'tuna', 'Campo', '60 min'),
+    D('12:00', 'Handebol masculino', 'Quartas 4', 'QUÍRON', 'BUF', 'uepa', 'Quadra', '50 min'),
+    D('13:00', 'Basquete feminino', 'Quartas 2', 'IMT', 'QUÍRON', 'tuna', 'Quadra', '50 min'),
+    D('14:00', 'Truco feminino', 'Semifinal 2', 'QUÍRON', 'IMT', 'tuna', 'Truco 1', '30 min'),
+    D('14:00', 'Sinuca masculino', 'Semifinal 1', 'QUÍRON', 'PRQ', 'tuna', 'Sinuca 1', '30 min'),
+    D('14:30', 'Tênis de mesa masculino', 'Quartas 2', 'PRQ', 'QUÍRON', 'tuna', 'Tênis de Mesa 1', '30 min'),
+    C('16:00', 'Tênis de mesa masculino', 'Semifinal 2', 'Venc. Q1', 'Venc. Q2', 'tuna', 'Tênis de Mesa 1', '30 min', 'Só se a Quíron vencer Tênis de mesa masculino Q2 (14:30)', false, 'Venc. Q1 é BUF ou URU. Venc. Q2 é PRQ ou Quíron.'),
+    C('16:30', 'Truco feminino', 'Final', 'Venc. S1', 'Venc. S2', 'tuna', 'Truco 1', '30 min', 'Só se a Quíron vencer Truco feminino S2 (14:00)', false, 'Venc. S1 é AGUIAS ou URU. Venc. S2 é IMT ou Quíron.'),
+    C('18:00', 'Sinuca masculino', 'Final', 'SPRM', 'Venc. S1', 'tuna', 'Sinuca 1', '30 min', 'Só se a Quíron vencer Sinuca masculino S1 (14:00)', false, 'Venc. S1 é PRQ ou Quíron.'),
+    C('18:30', 'Tênis de mesa masculino', 'Final', 'Venc. S1', 'Venc. S2', 'tuna', 'Tênis de Mesa 1', '30 min', 'Só se a Quíron vencer Tênis de mesa masculino S2 (16:00)', false, 'Venc. S1 é IMT ou SPRM. Venc. S2 é BUF, PRQ, Quíron ou URU.')
+  ];
+  D1.forEach(function (g) { g.dia = 1; });
+  D2.forEach(function (g) { g.dia = 2; });
+  var JOGOS = D1.concat(D2);
+  var DATAS = { 1: 'DIA 19', 2: 'DIA 20' };
+  var ROTULO_DIA = { 1: 'Dia 1 · dia 19', 2: 'Dia 2 · dia 20' };
 
-  var filtro = { status: 'todos', local: 'todos' };
+  var filtro = { dia: 2, status: 'todos', local: 'todos' };
+  var fDia = document.getElementById('f-dia');
   var fStatus = document.getElementById('f-status');
   var fLocal = document.getElementById('f-local');
   var lista = document.getElementById('lista');
 
+  function doDia() { return JOGOS.filter(function (g) { return g.dia === filtro.dia; }); }
   function el(tag, cls, texto) { var e = document.createElement(tag); if (cls) e.className = cls; if (texto != null) e.textContent = texto; return e; }
   function chip(rotulo, ativo, aoClicar) {
     var b = el('button', 'chip', rotulo); b.type = 'button';
     b.setAttribute('aria-pressed', ativo ? 'true' : 'false');
     b.addEventListener('click', aoClicar); return b;
   }
+  function numeros() {
+    var jd = doDia();
+    var dir = jd.filter(function (g) { return !g.cond; });
+    document.getElementById('n-diretos').textContent = dir.length;
+    document.getElementById('n-cond').textContent = jd.length - dir.length;
+    if (dir.length) {
+      document.getElementById('n-primeiro').textContent = dir[0].hora;
+      document.getElementById('t-primeiro').textContent = 'primeiro jogo, ' + dir[0].esporte.toLowerCase();
+    }
+  }
   function desenharFiltros() {
-    fStatus.textContent = ''; fLocal.textContent = '';
-    [['todos', 'Todos (' + JOGOS.length + ')'], ['diretos', 'Confirmados (' + diretos + ')'], ['cond', 'Se avançar (' + condicionais + ')']].forEach(function (p) {
+    fDia.textContent = ''; fStatus.textContent = ''; fLocal.textContent = '';
+    [1, 2].forEach(function (d) {
+      fDia.appendChild(chip(ROTULO_DIA[d], filtro.dia === d, function () { filtro.dia = d; desenhar(); }));
+    });
+    var jd = doDia();
+    var dir = jd.filter(function (g) { return !g.cond; }).length;
+    var cnd = jd.length - dir;
+    [['todos', 'Todos (' + jd.length + ')'], ['diretos', 'Confirmados (' + dir + ')'], ['cond', 'Se avançar (' + cnd + ')']].forEach(function (p) {
       fStatus.appendChild(chip(p[1], filtro.status === p[0], function () { filtro.status = p[0]; desenhar(); }));
     });
     fLocal.appendChild(chip('Todos os locais', filtro.local === 'todos', function () { filtro.local = 'todos'; desenhar(); }));
@@ -249,7 +283,7 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
   }
   function desenharLista() {
     lista.textContent = '';
-    var itens = JOGOS.filter(function (g) {
+    var itens = doDia().filter(function (g) {
       var okS = filtro.status === 'todos' || (filtro.status === 'diretos' ? !g.cond : !!g.cond);
       var okL = filtro.local === 'todos' || g.local === filtro.local;
       return okS && okL;
@@ -258,7 +292,7 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
     itens.forEach(function (g) {
       var c = el('article', 'jogo' + (g.cond ? ' cond' : ''));
       var h = el('div', 'hora');
-      h.appendChild(el('b', null, g.hora)); h.appendChild(el('span', 'dia', 'DIA 19')); h.appendChild(el('span', 'dur', g.dur));
+      h.appendChild(el('b', null, g.hora)); h.appendChild(el('span', 'dia', DATAS[g.dia])); h.appendChild(el('span', 'dur', g.dur));
       var i = el('div', 'info');
       i.appendChild(el('span', 'esporte', g.esporte + ' · ' + g.fase));
       i.appendChild(el('span', 'vs', g.a + ' x ' + g.b));
@@ -275,7 +309,7 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
   function contagem(k) {
     var d = JOGOS.filter(function (g) { return g.local === k && !g.cond; }).length;
     var c = JOGOS.filter(function (g) { return g.local === k && g.cond; }).length;
-    return 'Quíron: ' + d + (d === 1 ? ' jogo confirmado' : ' jogos confirmados') + (c ? ' e ' + c + ' se avançar' : '');
+    return 'Quíron nos dias 19 e 20: ' + d + (d === 1 ? ' jogo confirmado' : ' jogos confirmados') + (c ? ' e ' + c + ' se avançar' : '');
   }
   function desenharLocais() {
     var cont = document.getElementById('locais-lista');
@@ -287,7 +321,7 @@ section h2{font-family:var(--titulo);font-weight:400;font-size:32px;color:var(--
       c.appendChild(a); cont.appendChild(c);
     });
   }
-  function desenhar() { desenharFiltros(); desenharLista(); }
+  function desenhar() { numeros(); desenharFiltros(); desenharLista(); }
   desenhar(); desenharLocais();
 
   // Dica de instalação: só no Safari do iPhone/iPad, e só enquanto o app ainda não foi instalado.

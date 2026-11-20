@@ -1,10 +1,11 @@
-ATUALIZAÇÃO: quadra da UEPA de Educação Física
+ATUALIZAÇÃO: Dia 2 (dia 20) incluído
 
-Mudou só o local dos 2 jogos de futsal (13:00 feminino e 17:00 masculino): agora aparece
-"UEPA Educação Física · Quadra", com o endereço Av. João Paulo II, 817, Marco, e o link do Google Maps.
+O app agora tem um seletor "Dia 1 · dia 19" e "Dia 2 · dia 20" no alto da agenda.
+Abre direto no Dia 2. O Dia 1 continua igual.
 
 COMO ATUALIZAR NO GITHUB
 1. Abra o repositório no GitHub.
 2. Clique em "Add file" > "Upload files".
 3. Arraste os 7 arquivos desta pasta de uma vez e clique em "Commit changes".
 4. Espere 1 a 2 minutos e abra o link. Se aparecer a versão antiga, feche e abra o navegador de novo.
+   No iPhone com o app instalado: abra com internet, feche de verdade e abra outra vez.
